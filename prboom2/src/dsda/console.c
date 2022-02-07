@@ -253,12 +253,12 @@ static void dsda_ExecuteConsole(void) {
 
     if (scan_count == 1) args[0] = '\0';
 
-    M_CheatEntered(command, args);
-
-    for (entry = console_commands; entry->command; entry++) {
-      if (!stricmp(command, entry->command_name)) {
-        entry->command(args);
-        break;
+    if (!M_CheatEntered(command, args)) {
+      for (entry = console_commands; entry->command; entry++) {
+        if (!stricmp(command, entry->command_name)) {
+          entry->command(args);
+          break;
+        }
       }
     }
   }
