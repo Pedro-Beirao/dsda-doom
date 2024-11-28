@@ -128,6 +128,7 @@ int             leds_always_off = 0; // Expected by m_misc, not relevant
 
 // Mouse handling
 static dboolean mouse_enabled; // usemouse, but can be overriden by -nomouse
+int mouse_timer = TICRATE; // Counts tics since the mouse was last moved
 
 /////////////////////////////////////////////////////////////////////////////////
 // Keyboard handling
@@ -1541,6 +1542,12 @@ static void I_ReadMouse(void)
       event.data2.i = -y;
 
       D_PostEvent(&event);
+
+      mouse_timer = 0;
+    }
+    else
+    {
+      mouse_timer++;
     }
   }
 }
@@ -1568,6 +1575,9 @@ static dboolean MouseShouldBeGrabbed()
   // when menu is active or game is paused, release the mouse
   if (menuactive || dsda_Paused())
     return false;
+
+  if (mouse_timer >= TICRATE)
+    return true;
 
   // only grab mouse when playing levels (but not demos)
   return (gamestate == GS_LEVEL || gamestate == GS_INTERMISSION)
