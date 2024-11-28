@@ -1576,12 +1576,12 @@ static dboolean MouseShouldBeGrabbed()
   if (menuactive || dsda_Paused())
     return false;
 
+  // grab the mouse if it hasnt moved in 1 second
   if (mouse_timer >= TICRATE)
     return true;
 
   // only grab mouse when playing levels (but not demos)
-  return (gamestate == GS_LEVEL || gamestate == GS_INTERMISSION)
-          && !demoplayback && !advancedemo;
+  return gamestate != GS_DEMOSCREEN && !demoplayback && !advancedemo;
 }
 
 // Update the value of window_focused when we get a focus event
