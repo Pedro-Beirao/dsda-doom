@@ -87,6 +87,7 @@
 #include "e6y.h"//e6y
 
 #include "dsda.h"
+#include "dsda/analysis.h"
 #include "dsda/aim.h"
 #include "dsda/args.h"
 #include "dsda/brute_force.h"
@@ -1667,6 +1668,20 @@ void G_Ticker (void)
     }
 
     dsda_DisplayNotifications();
+
+
+    if (!players[displayplayer].mo)
+      return;
+
+    if (last_x != INT_MAX)
+      distance += abs(
+        (players[displayplayer].mo->x >> FRACBITS) - last_x +
+        (players[displayplayer].mo->y >> FRACBITS) - last_y);
+
+    last_x = (players[displayplayer].mo->x >> FRACBITS);
+    last_y = (players[displayplayer].mo->y >> FRACBITS);
+
+    printf("DISTANCE: %d\n", distance);
   }
 
   // cph - if the gamestate changed, we may need to clean up the old gamestate

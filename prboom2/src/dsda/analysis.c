@@ -26,6 +26,10 @@
 
 int dsda_analysis;
 
+fixed_t distance = 0;
+fixed_t last_x = INT_MAX;
+fixed_t last_y = INT_MAX;
+
 dboolean dsda_pacifist = true;
 dboolean dsda_reality = true;
 dboolean dsda_almost_reality = true;
@@ -111,6 +115,7 @@ void dsda_WriteAnalysis(void) {
   fprintf(fstream, "coop_spawns %d\n", coop_spawns);
   fprintf(fstream, "category %s\n", category);
   fprintf(fstream, "signature %d\n", is_signed);
+  fprintf(fstream, "distance %d\n", distance / 1000);
 
   fclose(fstream);
 

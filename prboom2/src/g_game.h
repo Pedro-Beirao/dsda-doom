@@ -35,7 +35,9 @@
 #include "doomdef.h"
 #include "d_event.h"
 #include "d_ticcmd.h"
+#include "m_fixed.h"
 #include "tables.h"
+#include <limits.h>
 
 //
 // GAME

@@ -18,6 +18,7 @@
 #include "base.h"
 
 #include "map_coordinates.h"
+#include "dsda/analysis.h"
 
 typedef struct {
   dsda_text_t component;
@@ -31,11 +32,13 @@ static void dsda_UpdateComponentText(char* str, size_t max_size) {
     max_size,
     "%sX: %-5d\n"
     "Y: %-5d\n"
-    "Z: %-5d",
+    "Z: %-5d\n"
+    "D: %dk",
     dsda_TextColor(dsda_tc_map_coords),
     (players[displayplayer].mo->x >> FRACBITS),
     (players[displayplayer].mo->y >> FRACBITS),
-    (players[displayplayer].mo->z >> FRACBITS)
+    (players[displayplayer].mo->z >> FRACBITS),
+    distance/1000
   );
 }
 

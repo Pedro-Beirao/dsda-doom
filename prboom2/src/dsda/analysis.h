@@ -22,6 +22,10 @@
 
 extern int dsda_analysis;
 
+extern fixed_t distance;
+extern fixed_t last_x;
+extern fixed_t last_y;
+
 extern dboolean dsda_pacifist;
 extern dboolean dsda_reality;
 extern dboolean dsda_almost_reality;
