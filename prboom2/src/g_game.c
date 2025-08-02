@@ -1680,8 +1680,6 @@ void G_Ticker (void)
 
     last_x = (players[displayplayer].mo->x >> FRACBITS);
     last_y = (players[displayplayer].mo->y >> FRACBITS);
-
-    printf("DISTANCE: %d\n", distance);
   }
 
   // cph - if the gamestate changed, we may need to clean up the old gamestate
