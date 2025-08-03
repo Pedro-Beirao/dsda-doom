@@ -1669,17 +1669,21 @@ void G_Ticker (void)
 
     dsda_DisplayNotifications();
 
+    if (gamestate == GS_LEVEL)
+    {
+      if (last_x != INT_MAX)
+        distance += abs(
+          (players[displayplayer].mo->x >> FRACBITS) - last_x +
+          (players[displayplayer].mo->y >> FRACBITS) - last_y);
 
-    if (!players[displayplayer].mo)
-      return;
-
-    if (last_x != INT_MAX)
-      distance += abs(
-        (players[displayplayer].mo->x >> FRACBITS) - last_x +
-        (players[displayplayer].mo->y >> FRACBITS) - last_y);
-
-    last_x = (players[displayplayer].mo->x >> FRACBITS);
-    last_y = (players[displayplayer].mo->y >> FRACBITS);
+      last_x = (players[displayplayer].mo->x >> FRACBITS);
+      last_y = (players[displayplayer].mo->y >> FRACBITS);
+    }
+    else
+    {
+      last_x = INT_MAX;
+      last_y = INT_MAX;
+    }
   }
 
   // cph - if the gamestate changed, we may need to clean up the old gamestate
