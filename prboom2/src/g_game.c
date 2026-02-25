@@ -4039,6 +4039,9 @@ dboolean G_CheckDemoStatus (void)
     // killough -- added fps information and made it work for longer demos:
     unsigned realtics = endtime-starttime;
 
+    printf("death_pos %d %d\n", players[displayplayer].mo->x  >> FRACBITS, players[displayplayer].mo->y  >> FRACBITS);
+
+
     M_SaveDefaults();
 
     lprintf(LO_INFO, "Timed %u gametics in %u realtics = %-.1f frames per second\n",
@@ -4088,6 +4091,8 @@ dboolean G_CheckDemoStatus (void)
 // CPhipps - renamed to doom_printf to avoid name collision with glibc
 void doom_printf(const char *s, ...)
 {
+
+  return;
   static char msg[MAX_MESSAGE_SIZE];
   va_list v;
   va_start(v,s);
