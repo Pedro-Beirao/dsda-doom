@@ -217,7 +217,6 @@ extern int finalecount;
 extern const char* finaletext;
 extern const char* finaleflat;
 extern const char* finalepatch;
-extern const char* endpic;
 extern int acceleratestage;
 extern int midstage;
 
@@ -245,8 +244,6 @@ int dsda_UStartFinale(void) {
 
   if (!finaleflat)
     finaleflat = "FLOOR4_8"; // use a single fallback for all maps.
-
-  endpic = gamemapinfo->endpic;
 
   return true;
 }
@@ -295,8 +292,7 @@ int dsda_UFTicker(void) {
         finalecount = 0;
         finalestage = 1;
         wipegamestate = -1; // force a wipe
-        if (!stricmp(gamemapinfo->endpic, "$BUNNY") ||
-            !stricmp(gamemapinfo->endpic, "$DEMON"))
+        if (!stricmp(gamemapinfo->endpic, "$BUNNY"))
           F_StartScroll(NULL, NULL, NULL, true);
         else if (!stricmp(gamemapinfo->endpic, "!"))
           return false; // let go of finale ownership
@@ -501,7 +497,7 @@ int dsda_UPrepareFinale(int* result) {
 void dsda_ULoadMapInfo(void) {
   int p;
 
-  if (dsda_Flag(dsda_arg_nomapinfo) || dsda_UseMapinfo() || hexen)
+  if (dsda_Flag(dsda_arg_nomapinfo) || dsda_UseMapinfo() || raven)
     return;
 
   p = -1;

@@ -64,7 +64,6 @@ int finalecount;
 const char*   finaletext;
 const char*   finaleflat;
 const char*   finalepatch;
-const char*   endpic;
 
 // defines for the end mission display text                     // phares
 
@@ -89,11 +88,6 @@ void F_StartFinale (void)
   int mnum;
   int muslump;
 
-  finaletext = NULL;
-  finaleflat = NULL;
-  finalepatch = NULL;
-  endpic = NULL;
-
   if (heretic) return Heretic_F_StartFinale();
   if (hexen) return Hexen_F_StartFinale();
 
@@ -104,15 +98,19 @@ void F_StartFinale (void)
   // killough 3/28/98: clear accelerative text flags
   acceleratestage = midstage = 0;
 
+  finaletext = NULL;
+  finaleflat = NULL;
+  finalepatch = NULL;
+
   dsda_InterMusic(&mnum, &muslump);
 
   if (muslump >= 0)
   {
-    S_ChangeMusInfoMusic(muslump, true, false);
+    S_ChangeMusInfoMusic(muslump, true);
   }
   else
   {
-    S_ChangeMusic(mnum, true, false);
+    S_ChangeMusic(mnum, true);
   }
 
   // Okay - IWAD dependend stuff.
@@ -482,7 +480,7 @@ static void F_StartCastMusic(const char* music, dboolean loop_music)
   }
   else if (gamemode == commercial)
   {
-    S_ChangeMusic(mus_evil, loop_music, false);
+    S_ChangeMusic(mus_evil, loop_music);
   }
   else
   {
@@ -737,7 +735,7 @@ static void F_StartScrollMusic(const char* music, dboolean loop_music)
       lprintf(LO_WARN, "Finale scroll music not found: %s\n", music);
   }
   else if (W_LumpNameExists("D_BUNNY"))
-    S_ChangeMusic(mus_bunny, loop_music, false);
+    S_ChangeMusic(mus_bunny, loop_music);
   else {
     lprintf(LO_WARN, "Finale scroll music unspecified\n");
     S_StopMusic();

@@ -2627,13 +2627,13 @@ void A_BossDeath(mobj_t *mo)
 {
   line_t junk;
 
+  // heretic_note: probably we can adopt the clean heretic style and merge
+  if (heretic) return Heretic_A_BossDeath(mo);
+
   if (dsda_BossAction(mo))
   {
     return;
   }
-
-  // heretic_note: probably we can adopt the clean heretic style and merge
-  if (heretic) return Heretic_A_BossDeath(mo);
 
   if (gamemode == commercial)
   {
@@ -4742,7 +4742,7 @@ void A_MakePod(mobj_t * actor)
 
 void A_ESound(mobj_t * mo)
 {
-    int sound = heretic_sfx_None;
+    int sound = sfx_None;
 
     switch (mo->type)
     {
@@ -5723,7 +5723,7 @@ void Hexen_A_Scream(mobj_t * actor)
                         sound = hexen_sfx_player_mage_normal_death;
                         break;
                     default:
-                        sound = hexen_sfx_None;
+                        sound = sfx_None;
                         break;
                 }
             }
@@ -5741,7 +5741,7 @@ void Hexen_A_Scream(mobj_t * actor)
                         sound = hexen_sfx_player_mage_crazy_death;
                         break;
                     default:
-                        sound = hexen_sfx_None;
+                        sound = sfx_None;
                         break;
                 }
             }
@@ -5759,7 +5759,7 @@ void Hexen_A_Scream(mobj_t * actor)
                         sound = hexen_sfx_player_mage_extreme1_death;
                         break;
                     default:
-                        sound = hexen_sfx_None;
+                        sound = sfx_None;
                         break;
                 }
                 sound += P_Random(pr_hexen) % 3;        // Three different extreme deaths
