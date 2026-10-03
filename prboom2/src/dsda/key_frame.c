@@ -139,29 +139,29 @@ static dsda_key_frame_t* dsda_ClosestKeyFrame(int target_tic_count) {
 
   if (auto_key_frames)
     for (int i = 0; i < auto_kf_size; i++)
-      if (auto_key_frames[i].kf.logictics_count <= target_tic_count)
-        if (!closest || auto_key_frames[i].kf.logictics_count > closest->logictics_count)
+      if (auto_key_frames[i].kf.logictic_count <= target_tic_count)
+        if (!closest || auto_key_frames[i].kf.logictic_count > closest->logictic_count)
           closest = &auto_key_frames[i].kf;
 
   if (playback_key_frames)
     for (int i = 0; i < playback_kf_count; i++)
-      if (playback_key_frames[i].logictics_count <= target_tic_count)
-        if (!closest || playback_key_frames[i].logictics_count > closest->logictics_count)
+      if (playback_key_frames[i].logictic_count <= target_tic_count)
+        if (!closest || playback_key_frames[i].logictic_count > closest->logictic_count)
           closest = &playback_key_frames[i];
 
   if (!demorecording && temp_kf.buffer)
-    if (temp_kf.logictics_count <= target_tic_count)
-      if (!closest || temp_kf.logictics_count > closest->logictics_count)
+    if (temp_kf.logictic_count <= target_tic_count)
+      if (!closest || temp_kf.logictic_count > closest->logictic_count)
         closest = &temp_kf;
 
   if (!demorecording && quick_kf.buffer)
-    if (quick_kf.logictics_count <= target_tic_count)
-      if (!closest || quick_kf.logictics_count > closest->logictics_count)
+    if (quick_kf.logictic_count <= target_tic_count)
+      if (!closest || quick_kf.logictic_count > closest->logictic_count)
         closest = &quick_kf;
 
   if (first_kf.buffer)
-    if (first_kf.logictics_count <= target_tic_count)
-      if (!closest || first_kf.logictics_count > closest->logictics_count)
+    if (first_kf.logictic_count <= target_tic_count)
+      if (!closest || first_kf.logictic_count > closest->logictic_count)
         closest = &first_kf;
 
   return closest;
@@ -237,13 +237,13 @@ void dsda_ExportKeyFrame(byte* buffer, int length) {
 
 // Stripped down version of G_DoSaveGame
 void dsda_StoreKeyFrame(dsda_key_frame_t* key_frame, byte complete, byte export) {
-  key_frame->logictics_count = true_logictic;
+  key_frame->logictic_count = true_logictic;
   key_frame->tic_count = dsda_DemoTic();
 
   P_InitSaveBuffer();
 
   P_SAVE_BYTE(complete);
-  P_SAVE_X(key_frame->logictics_count);
+  P_SAVE_X(key_frame->logictic_count);
   P_SAVE_X(key_frame->tic_count);
 
   // Store state of demo playback buffer
@@ -290,7 +290,7 @@ void dsda_RestoreKeyFrame(dsda_key_frame_t* key_frame, dboolean skip_wipe) {
   save_p = key_frame->buffer;
 
   P_LOAD_BYTE(complete);
-  P_LOAD_X(key_frame->logictics_count);
+  P_LOAD_X(key_frame->logictic_count);
   P_LOAD_X(key_frame->tic_count);
 
   // Restore state of demo playback buffer
